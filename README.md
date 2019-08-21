@@ -1,9 +1,7 @@
 # Description
-Terrafrom GKE cluster, Postgres DB installation
+Terrafrom Postgres DB installation
 ## Requirements 
 * Use terrafrom v0.12.6 version minimum
-* Use kubectl v1.15.1 version minimum
-* Use helm v2.14.3 version minimum
 * Configuration variables can be changed in files:
   ```shell
   variables.tf
@@ -14,6 +12,7 @@ Terrafrom GKE cluster, Postgres DB installation
   ```
   project_name - GCP project name
   gloud_creds_file - GCP json service account path
+  database_instance_name - database instance name. Change DB name at each new deploy !
   ```
 * Run:
   ```
