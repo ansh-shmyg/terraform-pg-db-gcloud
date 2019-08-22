@@ -12,14 +12,14 @@ variable "location" {
 
 // Database configuration
 variable "database_instance_name" {
-  default = "main-postgres-temp-xyz"
+  default = "main-postgres-aib"
 }
 
 resource "random_id" "db_prod_pass" {
   byte_length = 14
 }
 
-resource "random_id" "db_test_pass" {
-  byte_length = 14
+variable "db_test_user" {
+  default = "postgres"
 }
 

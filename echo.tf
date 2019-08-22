@@ -23,5 +23,5 @@ output "db_user_name_test" {
 }
 
 output "db_pass_test" {
-  value = "${random_id.db_test_pass.hex}"
+  value = "${var.db_test_user}"
 }
