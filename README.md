@@ -1,3 +1,6 @@
+# THIS Installation is INSECURE! Run it only on test environment.
+# DO NOT USE THIS ON PRODUCTION!
+
 # Description
 Terrafrom Postgres DB installation
 ## Requirements 
