@@ -1,5 +1,5 @@
 output "database_ip" {
-  value = "${google_sql_database_instance.postgres.private_ip_address}"
+  value = "${google_sql_database_instance.postgres.public_ip_address}"
 }
 
 output "db_name_prod" {
@@ -23,5 +23,6 @@ output "db_user_name_test" {
 }
 
 output "db_pass_test" {
-  value = "${random_id.db_test_pass.hex}"
+  value = "${var.db_test_user}"
 }
+

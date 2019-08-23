@@ -5,13 +5,16 @@ provider "google" {
 }
 
 resource "google_sql_database_instance" "postgres" {
-  name = "${var.database_instance_name}"
+  name = "${var.database_instance_name_prefix}-${random_id.db_name_suffix.hex}"
   database_version = "POSTGRES_9_6"
   settings {
     tier = "db-f1-micro"
     ip_configuration {
-     ipv4_enabled = "false"
-     private_network = "projects/${var.project_name}/global/networks/default"
+    ipv4_enabled = true
+    authorized_networks {
+      name = "pubilc_access"
+      value = "0.0.0.0/0"
+    }
    }
   }
 }
@@ -23,19 +26,19 @@ resource "google_sql_database" "database-prod" {
 }
 
 resource "google_sql_database" "database-test" {
-  name      = "test-db"
+  name      = "name"
   instance  = "${google_sql_database_instance.postgres.name}"
 }
 
 resource "google_sql_user" "users-prod" {
-  name     = "postgres"
+  name     = "user-prod"
   instance = "${google_sql_database_instance.postgres.name}"
   password = "${random_id.db_prod_pass.hex}"
 }
 
 resource "google_sql_user" "users-test" {
-  name     = "postgres-test"
+  name     = "postgres"
   instance = "${google_sql_database_instance.postgres.name}"
-  password = "${random_id.db_test_pass.hex}"
+  password = "${var.db_test_user}"
 }
 
