@@ -23,22 +23,26 @@ resource "google_sql_database_instance" "postgres" {
 resource "google_sql_database" "database-prod" {
   name      = "prod-db"
   instance  = "${google_sql_database_instance.postgres.name}"
+  depends_on = ["google_sql_database_instance.postgres"]
 }
 
 resource "google_sql_database" "database-test" {
   name      = "name"
   instance  = "${google_sql_database_instance.postgres.name}"
+  depends_on = ["google_sql_database_instance.postgres"]
 }
 
 resource "google_sql_user" "users-prod" {
   name     = "user-prod"
   instance = "${google_sql_database_instance.postgres.name}"
   password = "${random_id.db_prod_pass.hex}"
+  depends_on = ["google_sql_database_instance.postgres"]
 }
 
 resource "google_sql_user" "users-test" {
   name     = "postgres"
   instance = "${google_sql_database_instance.postgres.name}"
   password = "${var.db_test_user}"
+  depends_on = ["google_sql_database_instance.postgres"]
 }
 
